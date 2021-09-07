@@ -89,7 +89,7 @@ export class SmtpClient {
     await this.writeCmd("Subject: ", config.subject);
     await this.writeCmd("From: ", fromData);
     await this.writeCmd("To: ", toData);
-    await this.writeCmd("Date: ", new Date().toString());
+//    await this.writeCmd("Date: ", new Date().toString());
 
     if(config.html) {
       await this.writeCmd("Content-Type: multipart/alternative; boundary=AlternativeBoundary", "\r\n");
