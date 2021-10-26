@@ -83,6 +83,11 @@ export class SmtpClient {
     this.assertCode(await this.readCmd(), CommandCode.OK);
     await this.writeCmd("RCPT", "TO:", to);
     this.assertCode(await this.readCmd(), CommandCode.OK);
+    if(config.bcc){
+        const [bcc, bccData] = this.parseAddress(config.bcc);
+        await this.writeCmd("RCPT", "TO:", bcc);
+        this.assertCode(await this.readCmd(), CommandCode.OK);
+    }
     await this.writeCmd("DATA");
     this.assertCode(await this.readCmd(), CommandCode.BEGIN_DATA);
 
